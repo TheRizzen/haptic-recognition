@@ -27,8 +27,8 @@ def print_fingers(fingers):
 def cisors_check(fingers):
     if fingers[3]['ang'][0] >= 2 \
        and fingers[4]['ang'][0] >= 2 \
-       and fingers[1]['ang'][0] <= 0.3 \
-       and fingers[2]['ang'][0] <= 0.3 \
+       and fingers[1]['ang'][0] <= 0.5 \
+       and fingers[2]['ang'][0] <= 0.5 \
        and fingers[1]['ang'][1] <= 0.2 \
        and fingers[2]['ang'][1] >= 0:
         return True
