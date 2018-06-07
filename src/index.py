@@ -69,6 +69,7 @@ try:
 except ConnectionRefusedError:
     sys.exit(1)
 
+sign = 'NOTHING'
 while 1:
     data = s.recv(1024)
     data = data.decode().rstrip()
@@ -80,7 +81,10 @@ while 1:
     try:
         fingers = pdata['data']['fingers'];
         print_fingers(fingers)
+        old_sign = sign;
         sign = detect_sign(fingers)
+        if old_sign != sign and sign != 'NOTHING':
+            send_vibration_all()
         print(sign)
     except KeyError:
         pass
