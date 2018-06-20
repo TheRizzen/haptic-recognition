@@ -15,6 +15,15 @@ except ValueError:
     print('PORT_GLOVES is invalid')
     sys.exit(1)
 
+def read_json_payload(s):
+    data = s.recv(1024)
+    data = data.decode().rstrip()
+    try:
+        pdata = json.loads(data)
+        return pdata
+    except json.decoder.JSONDecodeError:
+        pass
+
 def send_vibration(finger_str):
     payload = '{"dst": "cc:78:ab:ad:ac:7a","type": "vibration","data": {"type": "%s","dur": 655, "str": 10}}\n' % finger_str
     payload = payload.encode('utf-8')
@@ -90,21 +99,15 @@ except ConnectionRefusedError:
 
 sign = 'NOTHING'
 while 1:
-    data = s.recv(1024)
-    data = data.decode().rstrip()
+    data = read_json_payload(s)
     try:
-        pdata = json.loads(data)
-    except json.decoder.JSONDecodeError:
-        pass
-
-    try:
-        fingers = pdata['data']['fingers'];
+        fingers = data['data']['fingers'];
         print_fingers(fingers)
         old_sign = sign;
         sign = detect_sign(fingers)
         if old_sign != sign and sign != 'NOTHING':
             send_vibration_all()
         print(sign)
-    except KeyError:
+    except (KeyError, TypeError):
         pass
 s.close()
