@@ -3,10 +3,17 @@
 import sys
 import socket
 import json
+import os
 
-#ADDR = '192.168.33.2'
-ADDR = '129.12.128.37' #cc:78:ab:ad:ac:7a (DK2_R) #DARSES_H
-PORT = 53450
+try:
+    ADDR = os.environ['IP_GLOVES']
+    PORT = int(os.environ['PORT_GLOVES'])
+except KeyError:
+    print('Please set IP_GLOVES AND PORT_GLOVES in env before starting this script')
+    sys.exit(1)
+except ValueError:
+    print('PORT_GLOVES is invalid')
+    sys.exit(1)
 
 def send_vibration(finger_str):
     payload = '{"dst": "cc:78:ab:ad:ac:7a","type": "vibration","data": {"type": "%s","dur": 655, "str": 10}}\n' % finger_str
@@ -54,17 +61,6 @@ def ninja_check(fingers):
     else:
         return False
 
-def spock_check(fingers):
-    if fingers[1]['ang'][0] <= 0.5 \
-       and fingers[2]['ang'][0] >= 0.5 \
-       and fingers[3]['ang'][0] <= 0.5 \
-       and fingers[4]['ang'][0] <= 0.5 \
-       and fingers[2]['ang'][1] <= 0.2 \
-       and fingers[3]['ang'][1] >= 0:
-        return True
-    else:
-        return False
-
 def paper_check(fingers):
     if fingers[1]['ang'][0] <= 0 \
        and fingers[2]['ang'][0] <= 0.1 \
@@ -83,9 +79,6 @@ def detect_sign(fingers):
         return 'PAPER'
     elif ninja_check(fingers):
         return 'NINJA'
-    elif spock_check(fingers):
-        return 'Live Long And Prospert'
-
     else:
         return 'NOTHING'
 
