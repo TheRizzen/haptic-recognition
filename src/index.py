@@ -108,5 +108,3 @@ while 1:
     except KeyError:
         pass
 s.close()
-
-##ceci est un test !!!
