@@ -24,16 +24,16 @@ def read_json_payload(s):
     except json.decoder.JSONDecodeError:
         pass
 
-def send_vibration(finger_str):
-    payload = '{"dst": "cc:78:ab:ad:ac:7a","type": "vibration","data": {"type": "%s","dur": 655, "str": 10}}\n' % finger_str
+def send_vibration(dst, finger_str):
+    payload = '{"dst": "%s","type": "vibration","data": {"type": "%s","dur": 655, "str": 10}}\n' % (dst, finger_str)
     payload = payload.encode('utf-8')
     s.send(payload);
 
-def send_vibration_all():
-    send_vibration('index')
-    send_vibration('middle')
-    send_vibration('third')
-    send_vibration('little')
+def send_vibration_all(dst):
+    send_vibration(dst, 'index')
+    send_vibration(dst, 'middle')
+    send_vibration(dst, 'third')
+    send_vibration(dst, 'little')
 
 def print_fingers(fingers):
     print(fingers[1])
@@ -97,16 +97,21 @@ try:
 except ConnectionRefusedError:
     sys.exit(1)
 
+try:
+    src = read_json_payload(s)['src']
+except (KeyError, TypeError):
+    pass
+
+
 sign = 'NOTHING'
 while 1:
     data = read_json_payload(s)
     try:
         fingers = data['data']['fingers'];
-        print_fingers(fingers)
         old_sign = sign;
         sign = detect_sign(fingers)
         if old_sign != sign and sign != 'NOTHING':
-            send_vibration_all()
+            send_vibration_all(src)
         print(sign)
     except (KeyError, TypeError):
         pass
