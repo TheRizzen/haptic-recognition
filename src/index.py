@@ -4,11 +4,12 @@ import sys
 import socket
 import json
 
-ADDR = '192.168.33.2'
-PORT = 53451
+#ADDR = '192.168.33.2'
+ADDR = '129.12.128.37' #cc:78:ab:ad:ac:7a (DK2_R) #DARSES_H
+PORT = 53450
 
 def send_vibration(finger_str):
-    payload = '{"dst": "cc:78:ab:ad:ac:0d","type": "vibration","data": {"type": "%s","dur": 655, "str": 10}}\n' % finger_str
+    payload = '{"dst": "cc:78:ab:ad:ac:7a","type": "vibration","data": {"type": "%s","dur": 655, "str": 10}}\n' % finger_str
     payload = payload.encode('utf-8')
     s.send(payload);
 
@@ -44,6 +45,26 @@ def rock_check(fingers):
     else:
         return False
 
+def ninja_check(fingers):
+    if fingers[1]['ang'][0] <= 0.5 \
+       and fingers[2]['ang'][0] <= 0.5 \
+       and fingers[3]['ang'][0] >= 2 \
+       and fingers[4]['ang'][0] >= 2:
+        return True
+    else:
+        return False
+
+def spock_check(fingers):
+    if fingers[1]['ang'][0] <= 0.5 \
+       and fingers[2]['ang'][0] >= 0.5 \
+       and fingers[3]['ang'][0] <= 0.5 \
+       and fingers[4]['ang'][0] <= 0.5 \
+       and fingers[2]['ang'][1] <= 0.2 \
+       and fingers[3]['ang'][1] >= 0:
+        return True
+    else:
+        return False
+
 def paper_check(fingers):
     if fingers[1]['ang'][0] <= 0 \
        and fingers[2]['ang'][0] <= 0.1 \
@@ -60,6 +81,11 @@ def detect_sign(fingers):
         return 'ROCK'
     elif paper_check(fingers):
         return 'PAPER'
+    elif ninja_check(fingers):
+        return 'NINJA'
+    elif spock_check(fingers):
+        return 'Live Long And Prospert'
+
     else:
         return 'NOTHING'
 
@@ -89,4 +115,3 @@ while 1:
     except KeyError:
         pass
 s.close()
-
