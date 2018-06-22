@@ -1,6 +1,6 @@
-#!/usr/bin/env shell
+#!/bin/sh 
 
 export  IP_GLOVES=127.0.0.1
 export  PORT_GLOVES=53450
 
-py ./index.py
+python3 src/index.py
