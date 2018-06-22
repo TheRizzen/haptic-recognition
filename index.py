@@ -4,16 +4,13 @@ import sys
 import socket
 import json
 import os
+import argparse
 
-try:
-    ADDR = os.environ['IP_GLOVES']
-    PORT = int(os.environ['PORT_GLOVES'])
-except KeyError:
-    print('Please set IP_GLOVES AND PORT_GLOVES in env before starting this script')
-    sys.exit(1)
-except ValueError:
-    print('PORT_GLOVES is invalid')
-    sys.exit(1)
+parser = argparse.ArgumentParser(description='Test')
+parser.add_argument('host')
+parser.add_argument('port', type=int)
+args = parser.parse_args()
+print(args)
 
 def read_json_payload(s):
     data = s.recv(1024)
@@ -93,6 +90,7 @@ try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((ADDR, PORT))
 except ConnectionRefusedError:
+    print('Connection failed with gloves server')
     sys.exit(1)
 
 try:
