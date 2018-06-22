@@ -6,11 +6,10 @@ import json
 import os
 import argparse
 
-parser = argparse.ArgumentParser(description='Test')
+parser = argparse.ArgumentParser()
 parser.add_argument('host')
 parser.add_argument('port', type=int)
 args = parser.parse_args()
-print(args)
 
 def read_json_payload(s):
     data = s.recv(1024)
@@ -88,7 +87,7 @@ def detect_sign(fingers):
 
 try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((ADDR, PORT))
+    s.connect((args.host, args.port))
 except ConnectionRefusedError:
     print('Connection failed with gloves server')
     sys.exit(1)
