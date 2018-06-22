@@ -86,8 +86,6 @@ def detect_sign(fingers):
         return 'ROCK'
     elif paper_check(fingers):
         return 'PAPER'
-    elif ninja_check(fingers):
-        return 'NINJA'
     else:
         return 'NOTHING'
 
@@ -110,6 +108,7 @@ while 1:
         fingers = data['data']['fingers'];
         old_sign = sign;
         sign = detect_sign(fingers)
+        print_fingers(fingers)
         if old_sign != sign and sign != 'NOTHING':
             send_vibration_all(src)
         print(sign)
