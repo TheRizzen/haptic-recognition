@@ -9,14 +9,6 @@ message = {
   'won': "Yay you won!",
   'lost': "Aww you lost!"
 }
-#
-#j'imaginais qqch comme ca:
-#position1 = {
-#  'thumb': 2,
-#  'index': 3.4,
-#  ...
-#}
-#
 
 def decide_winner(user_choice, computer_choice):
   print "Player: %s" % user_choice
