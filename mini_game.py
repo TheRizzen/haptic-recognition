@@ -1,7 +1,8 @@
-##
-## mini RPS game
-##
+#
+# mini RPS game
+#
 from random import randint
+
 
 options = ["ROCK", "PAPER", "SCISSORS"]
 message = {
@@ -9,23 +10,27 @@ message = {
   'won': "Yay you won!",
   'lost': "Aww you lost!"
 }
+
+# bonjour = [[], []]
 #
 #j'imaginais qqch comme ca:
-#position1 = {
-#  'thumb': 2,
-#  'index': 3.4,
-#  ...
-#}
+# bonjour = {
+#   'thumb': [1, 2],
+#   'index': 3.4,
+#   ...
+# }
 #
 
 def decide_winner(user_choice, computer_choice):
   print "Player: %s" % user_choice
   print "AI: %s" % computer_choice
+  sign = detect_sign(fingers)
+  print "The sign is "
 
-  if user_choice == computer_choice:
+  if sign == computer_choice:
       	print message['tie']
   ## check combinaisions when player wins
-  elif user_choice == options[0] and\
+  elif sign == options[0] and\
        computer_choice == options[2]\
        or\
        user_choice == options[1] and\
@@ -47,5 +52,5 @@ def play_RPS():
   computer_choice = options[randint(0, 2)]
   decide_winner(user_choice, computer_choice)
 
-while 42:
-	play_RPS()
+#while 42:
+	#play_RPS()
