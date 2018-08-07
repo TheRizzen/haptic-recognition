@@ -1,26 +1,27 @@
 #!/usr/bin/env python3
+# server
 
 # Packages
 import asyncio
 import websockets
 
-
+# create and display our outputs in a html page
 async def python_web_interface(websocket, path):
-
-
-    # on reçois l'input du client client
+    # var i used to ddisplay the number of the msg received in the terminal
     i = 0
+    msg = ""
     while i < 10:
+        # on reçois l'input du client client
         input_message = await websocket.recv()
-        i = i + 1
+        msg = msg + " " + input_message
 
-        # je créé un fichier html
+        # I create an html file
         f = open('helloworld.html','w')
 
         ##
-        # MESSAGES
+        #  PAGE HTML
         ##
-        # header du html
+        # header
         pythonHtmlHeader = """
         <!DOCTYPE html>
         <html lang="en">
@@ -29,40 +30,40 @@ async def python_web_interface(websocket, path):
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta http-equiv="X-UA-Compatible" content="ie=edge">
           <link rel="stylesheet" href="master.css">
-          <title>Document</title>
+          <title>Thesis kent</title>
         </head>
         <body>
-
           <div class="jumbotron vertical-center ">
             <div class="container">"""
 
-        # body du html
-        pythonHtmlBody = input_message
+        # body - display my outputs here
+        pythonHtmlBody = msg
 
-        # footer du html
+        # footer
         pythonHtmlFooter = """
             </div>
           </div>
-
         </body>
         </html>"""
 
 
-        # ici je renvoie un message au client pour dire
-        # que j'ai bien reçu le message et que tout c'est bien déroulé
+        # here i send a message to the client to tell him that everything went well
         sentMsg = "Envoyé: " + str(i) + " : " + f"{input_message}!"
         await websocket.send(input_message)
-        print("Reçu " + str(i) + ": " + f"{input_message}")
+        print("Received " + str(i) + ": " + f"{msg}")
 
-        # j'écris mon code html + message dans mon fichier .html
+        # write html code in my html file i created above
         f.write(pythonHtmlHeader)
         f.write(pythonHtmlBody)
         f.write(pythonHtmlFooter)
         f.close()
 
-# communique avec mon client
+        # increment the number of the message
+        i = i + 1
+
+# communicate with my client - start server
 start_server = websockets.serve(python_web_interface, 'localhost', 8765)
 
-# while 42
+# run until task complete and forever...
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()

@@ -1,28 +1,31 @@
 #!/usr/bin/env python3
+# client
 
-# WS client example
-
+# Packages
 import asyncio
 import websockets
 
 async def hello():
-    # on se connecte
+    # connection
     async with websockets.connect(
             'ws://localhost:8765') as websocket:
-
-        # input du user rentré à la main
+        # var i used to ddisplay the number of the msg received in the terminal
         i = 0
         while i < 10:
+            # TODO: replace user inputs by gloves output
             input_message = input("What do you want to type ?\n ")
 
-            # on dit au server ce qu'on lui envoie
+            # send input to server
             await websocket.send(input_message)
-            i = i + 1
 
-            # le server nous répond pour dire que tout s'est bien passé
+            # the server tell us everything went well
             receivedMsg = await websocket.recv()
             print("Envoyé " + str(i) + ": " +f"{receivedMsg}\n")
 
-# pour recevoir des input 24/7
-#while 42:
+            # increment the number of the message
+            i = i + 1
+
+
+# run until task complete and forever...
 asyncio.get_event_loop().run_until_complete(hello())
+asyncio.get_event_loop().run_forever()
