@@ -7,38 +7,58 @@ import websockets
 
 async def python_web_interface(websocket, path):
 
+
     # on reçois l'input du client client
-    message = await websocket.recv()
+    i = 0
+    while i < 10:
+        input_message = await websocket.recv()
+        i = i + 1
 
-    # j'affiche l'input dans côté client (terminal)
-    # pour debug - peut être retiré
-    print(f"< {message}")
-    greeting = f"Hello {message}!"
+        # je créé un fichier html
+        f = open('helloworld.html','w')
 
-    # je créé un fichier html
-    f = open('helloworld.html','w')
+        ##
+        # MESSAGES
+        ##
+        # header du html
+        pythonHtmlHeader = """
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          <link rel="stylesheet" href="master.css">
+          <title>Document</title>
+        </head>
+        <body>
 
-    # message qu'on passe au fichier .html
-    # contient tout le html et concatène avec
-    # l'input pour l'afficher dans le html
-    pythonHtml = """
-    <html>
-    <head></head>
-    <body>
-        <p>hello</p>"""+\
-        message +\
-    """
-    </body>
-    </html>"""
+          <div class="jumbotron vertical-center ">
+            <div class="container">"""
 
-    # ici je renvoie un message au client pour dire
-    # que j'ai bien reçu le message et que tout c'est bien déroulé
-    await websocket.send(greeting)
-    print(f"> {greeting}")
+        # body du html
+        pythonHtmlBody = input_message
 
-    # j'écris mon code html + message dans mon fichier .html
-    f.write(pythonHtml)
-    f.close()
+        # footer du html
+        pythonHtmlFooter = """
+            </div>
+          </div>
+
+        </body>
+        </html>"""
+
+
+        # ici je renvoie un message au client pour dire
+        # que j'ai bien reçu le message et que tout c'est bien déroulé
+        sentMsg = "Envoyé: " + str(i) + " : " + f"{input_message}!"
+        await websocket.send(input_message)
+        print("Reçu " + str(i) + ": " + f"{input_message}")
+
+        # j'écris mon code html + message dans mon fichier .html
+        f.write(pythonHtmlHeader)
+        f.write(pythonHtmlBody)
+        f.write(pythonHtmlFooter)
+        f.close()
 
 # communique avec mon client
 start_server = websockets.serve(python_web_interface, 'localhost', 8765)

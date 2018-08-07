@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Karla');
+
+
+body {
+  font-size: 30px;
+  font-family: 'Karla', sans-serif;
+  background-color: #e2e2e2;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 50%;
+  border: solid 1px black;
+  background-color: #fff;
+  text-align: center;
+}
