@@ -1,17 +1,24 @@
 
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <meta http-equiv="X-UA-Compatible" content="ie=edge">
-          <link rel="stylesheet" href="master.css">
-          <title>Thesis kent</title>
-        </head>
-        <body>
-          <div class="jumbotron vertical-center ">
-            <div class="container"> Hello World I concatene my inputs !
-            </div>
-          </div>
-        </body>
-        </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="master.css">
+  <title>Thesis kent</title>
+</head>
+<body>
+  <div class="jumbotron vertical-center ">
+    <div class="container" id="time">
+    </div>
+  </div>
+</body>
+<script>
+  setInterval("my_function();",3000);
+
+    function my_function(){
+        window.location = location.href;
+    }
+</script>
+</html>

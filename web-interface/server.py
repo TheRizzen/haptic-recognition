@@ -15,6 +15,8 @@ async def python_web_interface(websocket, path):
         input_message = await websocket.recv()
         msg = msg + " " + input_message
 
+        if input_message == "rm":
+            msg =""
         # I create an html file
         f = open('helloworld.html','w')
 
@@ -23,28 +25,35 @@ async def python_web_interface(websocket, path):
         ##
         # header
         pythonHtmlHeader = """
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <meta http-equiv="X-UA-Compatible" content="ie=edge">
-          <link rel="stylesheet" href="master.css">
-          <title>Thesis kent</title>
-        </head>
-        <body>
-          <div class="jumbotron vertical-center ">
-            <div class="container">"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="master.css">
+  <title>Thesis kent</title>
+</head>
+<body>
+  <div class="jumbotron vertical-center ">
+    <div class="container" id="time">"""
 
         # body - display my outputs here
         pythonHtmlBody = msg
 
         # footer
         pythonHtmlFooter = """
-            </div>
-          </div>
-        </body>
-        </html>"""
+    </div>
+  </div>
+</body>
+<script>
+  setInterval("my_function();",3000);
+
+    function my_function(){
+        window.location = location.href;
+    }
+</script>
+</html>"""
 
 
         # here i send a message to the client to tell him that everything went well
