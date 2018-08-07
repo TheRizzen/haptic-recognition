@@ -20,7 +20,7 @@ async def hello():
 
             # the server tell us everything went well
             receivedMsg = await websocket.recv()
-            print("Envoyé " + str(i) + ": " +f"{receivedMsg}\n")
+            print("Sent " + str(i) + ": " +f"{receivedMsg}\n")
 
             # increment the number of the message
             i = i + 1
