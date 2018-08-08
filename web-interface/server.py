@@ -15,8 +15,8 @@ async def python_web_interface(websocket, path):
         input_message = await websocket.recv()
         msg = msg + " " + input_message
 
-        if input_message == "rm":
-            msg =""
+        if input_message == "RIEN":
+            msg = ""
         # I create an html file
         f = open('helloworld.html','w')
 

@@ -4,7 +4,7 @@ from sensoglove import SensoGlove
 import sys
 import os
 
-gloves = SensoGlove('127.0.0.1', 53450)
+gloves = SensoGlove('192.168.56.101', 53450)
 gloves.connect()
 
 sign = 'Nothing'
@@ -46,39 +46,45 @@ def vibration():
         gloves.send_vibration(gloves.hand.fingers.third,655, 10)
         gloves.send_vibration(gloves.hand.fingers.little,655, 10)
 
-
+prev = 0
 def detection_sign(data):
-        if data.index.pitch <= 0.5 \
-           and data.middle.pitch <= 0.5 \
-           and data.third.pitch >= 2 \
-           and data.little.pitch >=2:
-                vibration
-                return ('Ninja')
+    global prev
+    if data.index.pitch <= 0.5 \
+       and data.middle.pitch <= 0.5 \
+       and data.third.pitch >= 2 \
+       and data.little.pitch >=2\
+       and prev != 1:
+        vibration()
+        prev = 1
+        return ('Ninja')
 
-        if data.index.pitch  >= 2 \
-           and data.middle.pitch  >= 2 \
-           and data.third.pitch >= 2 \
-           and data.little.pitch >=2:
-                return ('Rock')
-        else:
-                return ('RIEN')
+    if data.index.pitch  >= 2 \
+       and data.middle.pitch  >= 2 \
+       and data.third.pitch >= 2 \
+       and data.little.pitch >=2\
+       and prev != 2:
+        prev = 2
+        return ('Rock')
+    else:
+        return ('RIEN')
 
 
 
 count = 0
 
 
-while 1:
-
-        print('\33[102m' + "__________" + '\033[0m')
+def display():
+        #print('\33[102m' + "__________" + '\033[0m')
 
         gloves.fetch_data()
 
         try:
-                data = gloves.hand.fingers
-                sign =  detection_test(data)
-                # sign =  detection_sign(data)
-                count += 1
-                #print(sign)
+            data = gloves.hand.fingers
+            #sign =  detection_test(data)
+            sign =  detection_sign(data)
+            #count += 1
+            print(sign)
+
         except (KeyError, TypeError):
-                pass
+            pass
+        return sign
