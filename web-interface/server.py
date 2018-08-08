@@ -47,7 +47,7 @@ async def python_web_interface(websocket, path):
   </div>
 </body>
 <script>
-  setInterval("my_function();",3000);
+  setInterval("my_function();",1000);
 
     function my_function(){
         window.location = location.href;
