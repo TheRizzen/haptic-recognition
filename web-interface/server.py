@@ -5,26 +5,7 @@
 import asyncio
 import websockets
 
-# create and display our outputs in a html page
-async def python_web_interface(websocket, path):
-    # var i used to ddisplay the number of the msg received in the terminal
-    i = 0
-    msg = ""
-    while i < 10:
-        # on reçois l'input du client client
-        input_message = await websocket.recv()
-        msg = msg + " " + input_message
-
-        if input_message == "RIEN":
-            msg = ""
-        # I create an html file
-        f = open('helloworld.html','w')
-
-        ##
-        #  PAGE HTML
-        ##
-        # header
-        pythonHtmlHeader = """
+pythonHtmlHeader = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,11 +19,7 @@ async def python_web_interface(websocket, path):
   <div class="jumbotron vertical-center ">
     <div class="container" id="time">"""
 
-        # body - display my outputs here
-        pythonHtmlBody = msg
-
-        # footer
-        pythonHtmlFooter = """
+pythonHtmlFooter = """
     </div>
   </div>
 </body>
@@ -55,6 +32,37 @@ async def python_web_interface(websocket, path):
 </script>
 </html>"""
 
+# create and display our outputs in a html page
+async def python_web_interface(websocket, path):
+    # var i used to ddisplay the number of the msg received in the terminal
+    i = 0
+    msg = ""
+    while i < 10:
+        # on reçois l'input du client client
+        input_message = await websocket.recv()
+
+        # if input_message == "RIEN" and bool = 0:
+        #     espace
+        #     bool = 1
+        if input_message == "RIEN":
+            print("AAA")
+            pass
+        else:
+            print("BBB")
+            msg = msg + " " + input_message
+
+            # I create an html file
+        f = open('helloworld.html','w')
+        ##
+        #  PAGE HTML
+        ##
+        # header
+        pythonHtmlHeader
+        # body - display my outputs here
+        pythonHtmlBody = msg
+
+        # footer
+        pythonHtmlFooter
 
         # here i send a message to the client to tell him that everything went well
         sentMsg = "Envoyé: " + str(i) + " : " + f"{input_message}!"

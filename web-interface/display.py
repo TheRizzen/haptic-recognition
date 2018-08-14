@@ -3,6 +3,7 @@
 from sensoglove import SensoGlove
 import sys
 import os
+import time
 
 gloves = SensoGlove('192.168.56.101', 53450)
 gloves.connect()
@@ -54,11 +55,10 @@ def detection_sign(data):
        and data.third.pitch >= 2 \
        and data.little.pitch >=2\
        and prev != 1:
-        vibration()
         prev = 1
         return ('Ninja')
 
-    if data.index.pitch  >= 2 \
+    elif data.index.pitch  >= 2 \
        and data.middle.pitch  >= 2 \
        and data.third.pitch >= 2 \
        and data.little.pitch >=2\
@@ -73,7 +73,7 @@ def detection_sign(data):
 count = 0
 
 
-def display():
+def displayData():
         #print('\33[102m' + "__________" + '\033[0m')
 
         gloves.fetch_data()
@@ -88,3 +88,11 @@ def display():
         except (KeyError, TypeError):
             pass
         return sign
+
+def displayToClient():
+    bite = displayData()
+    print("sign: ")
+    print(sign)
+
+    time.sleep(1)
+    return bite
