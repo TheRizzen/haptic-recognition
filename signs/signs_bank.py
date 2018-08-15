@@ -20,3 +20,9 @@ class SignsBank:
 
     def add_sign(self, sign):
         self.signs.append(sign)
+
+    def compare_with_signs(self, hand):
+        for sign in self.signs:
+            if sign.compare(hand):
+                return sign
+        return None
