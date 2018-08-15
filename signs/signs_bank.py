@@ -17,3 +17,6 @@ class SignsBank:
                 pickle.dump(self.signs, input_file)
         except Exception as e:
             print('Dumping signs bank failed: ', e)
+
+    def add_sign(self, sign):
+        self.signs.append(sign)
