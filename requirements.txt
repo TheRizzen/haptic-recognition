@@ -1,1 +1,1 @@
-sensoglove==0.1
+sensoglove==0.2
