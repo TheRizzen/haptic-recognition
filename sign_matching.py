@@ -15,7 +15,7 @@ args = parser.parse_args()
 glove = SensoGlove(args.glove_host, args.glove_port)
 
 sb = SignsBank()
-sb.load_from_file('voc1.dat')
+sb.load_from_file('signDataBank.dat')
 
 glove.connect()
 
