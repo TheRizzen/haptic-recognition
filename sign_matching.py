@@ -27,6 +27,7 @@ except OSError:
     print('Socket connection failed with %s:%d.' % (args.listener_host, args.listener_port))
     raise
 
+
 sign = None
 while 1:
     glove.fetch_data()
