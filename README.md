@@ -28,7 +28,7 @@ install requirements:
 pip install -r requirements.txt
 
 install our wrapper
-pip install Sensogloves
+pip install sensoglove
 
 
 
