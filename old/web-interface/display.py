@@ -5,6 +5,8 @@ import sys
 import os
 import time
 
+#addaptation of the display_1.py function for web
+
 gloves = SensoGlove('192.168.56.101', 53450)
 gloves.connect()
 
@@ -89,6 +91,7 @@ def displayData():
             pass
         return sign
 
+#send the sign to the web client
 def displayToClient():
     bite = displayData()
     print("sign: ")

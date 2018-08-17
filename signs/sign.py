@@ -1,8 +1,11 @@
 import math
 
+#pitch sensibilities for the pitch when compare the sign bank and the input sign
 PITCH_FINGER_COMPARISON_SENSIBILITY = 0.2
+#yaw sensibilities for the pitch when compare the sign bank and the input sign
 YAW_FINGER_COMPARISON_SENSIBILITY = 0.1
 
+#compare finger from the input and the bank
 def compare_finger(glove_finger, sign_finger):
     sensibilities = [PITCH_FINGER_COMPARISON_SENSIBILITY, YAW_FINGER_COMPARISON_SENSIBILITY]
     for i in range(0, 2):

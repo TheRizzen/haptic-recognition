@@ -5,6 +5,8 @@ import argparse
 from sensoglove import SensoGlove
 from signs.signs_bank import SignsBank
 
+#improuvement of the sing_matching.py function
+
 parser = argparse.ArgumentParser()
 parser.add_argument('glove_host')
 parser.add_argument('glove_port', type=int)
@@ -29,8 +31,9 @@ except OSError:
 
 
 old_meaning= 'nothing'
+#function who detect sign and compare it
 def detection_sign(data):
-    matching_sign = sb.compare_with_signs(data)    
+    matching_sign = sb.compare_with_signs(data)
 
     if matching_sign is not None and matching_sign.meaning is not old_meaning:
         old_meaning == matching_sign.meaning
