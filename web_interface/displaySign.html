@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Thesis - University of Kent</title>
+  </head>
+
+  <!-- STYLE -->
+  <!-- here we put the css into the tag style because we open this index in our localhost. By doing so we can load the css -->
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Karla');
+
+
+    body {
+      font-size: 30px;
+      font-family: 'Karla', sans-serif;
+      background-color: #e2e2e2;
+    }
+
+    .vertical-center {
+      min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+      min-height: 100vh; /* These two lines are counted as one :-)       */
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .container {
+      width: 50%;
+      height: 42px;
+      border: solid 1px black;
+      background-color: #fff;
+      text-align: center;
+    }
+
+  </style>
+  <!-- CONTENT -->
+  <body>
+    <div class="vertical-center">
+      <div class="container" id="result"></div>
+      <div>
+        <a href="~/Documents/GitHub/haptic-recognition/README.pdf" target="_blank">Documentation</a>
+      </div>
+    </div>
+
+    <!-- SCRIPTS JS -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io('http://localhost:8080');
+
+      const result = document.getElementById('result');
+
+      socket.on('new_sign', (meaning) => {
+        console.log(meaning);
+        result.innerHTML += `${meaning} `;
+      });
+    </script>
+  </body>
+</html>
