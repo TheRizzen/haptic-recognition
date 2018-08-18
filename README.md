@@ -1,13 +1,11 @@
 # Visual Communication with haptic gloves
 
-### Packages you need to install:
-- Express: https://expressjs.com/en/starter/installing.html
+## Installation:
+- [Express](https://expressjs.com/en/starter/installing.html)
+- [Socket.io](https://socket.io/)
+
 ```sh
-$ npm install express --save
-```
-- Socket.io
-```sh
-$ npm install --save socket.io
+$ npm install
 ```
 - Yarn: https://yarnpkg.com/lang/en/docs/install/#mac-stable
 ```sh
