@@ -14,6 +14,7 @@ parser.add_argument('glove_host')
 parser.add_argument('glove_port', type=int)
 parser.add_argument('listener_host')
 parser.add_argument('listener_port', type=int)
+parser.add_argument('signbank_file')
 args = parser.parse_args()
 
 #initialise the glove object with the argument
@@ -21,7 +22,7 @@ glove = SensoGlove(args.glove_host, args.glove_port)
 
 #initialise the bank signe
 sb = SignsBank()
-sb.load_from_file('signDataBank.dat')
+sb.load_from_file(args.signbank_file)
 
 glove.connect()
 
