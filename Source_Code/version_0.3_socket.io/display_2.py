@@ -5,16 +5,16 @@ from signs.signs_bank import SignsBank
 import sys
 import os
 
-#impourvement of the display_1.py function
+# Improvement of the display_1.py function
 
-#keep the old meaning
+# Keep the old meaning
 old_meaning = 'nothing'
 def detection_sign(data):
         print('\33[102m' + "__________" + '\033[0m')
-        #compare the data with the bank
+        # Compare the data with the bank
         detection = sb.compare_with_signs(data)
 
-        #compare if the sign is not None or not the old meaning and send it
+        # Compare if the sign is not None or not the old meaning and send it
         if  detection is not None:
                 if old_meaning is not detectionn.meaning:
                         old_meaning ==  detection.meaning
@@ -26,9 +26,9 @@ def detection_sign(data):
 gloves = SensoGlove('127.0.0.1', 53450)
 gloves.connect()
 
-#initialise the bank function
+# Initialise the bank function
 sb = SignsBank()
-#load a file
+# Load a file
 sb.load_from_fille('test.dat')
 
 sign = 'Nothing'

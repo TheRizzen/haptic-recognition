@@ -14,12 +14,12 @@ parser.add_argument('port', type=int)
 parser.add_argument('file')
 args = parser.parse_args()
 
-# clear the termminal line
+# Clear the termminal line
 def clear_line(scr, x):
     scr.move(x, 0)
     scr.clrtoeol()
 
-# init curses variables  
+# Init curses variables
 def init_curses(scr, mode=True):
     if mode:
         curses.noecho()
@@ -28,7 +28,7 @@ def init_curses(scr, mode=True):
     curses.curs_set(not mode)
     scr.nodelay(mode)
 
-# input sign meaning
+# Input sign meaning
 def input_sign(glove, scr):
     clear_line(scr, 3)
     hand = glove.hand
@@ -40,7 +40,7 @@ def input_sign(glove, scr):
 
     return Sign(hand, meaning)
 
-# main loop
+# Main loop
 def ncurses_loop(glove, sign_bank):
     scr = curses.initscr()
     init_curses(scr, True)

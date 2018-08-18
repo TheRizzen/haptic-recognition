@@ -5,22 +5,21 @@ from signs.signs_bank import SignsBank
 import sys
 import os
 
-#function display who check sign and print dirrectly the sign found
+# Function display who checks sign and print directly the sign found
 
-
-#connection de the gloves with the server and the port of the glove, available on the SensoUi
-#and create a object gloves
+# Connection the gloves with the server and the port of the glove, available on the SensoUi
+# Create an object gloves
 gloves = SensoGlove('127.0.0.1', 53450)
 gloves.connect()
 
-#function who print the data reciev from the gloves for each finger (withou the thrumb)
+# Function who print the data received from the gloves for each finger (without his thumb)
 def detection_test(data):
 
         print('\33[93m' + "index" + '\033[0m')
         print ('index:')
-        print(data.index.pitch) #print the pitch
-        print(data.index.roll)  #print the roll
-        print(data.index.yaw)   #print the yaw
+        print(data.index.pitch) # Print the pitch
+        print(data.index.roll)  # Print the roll
+        print(data.index.yaw)   # Print the yaw
 
         print('\33[91m' + "middle" + '\033[0m')
         print(data.middle.pitch)
@@ -37,18 +36,18 @@ def detection_test(data):
         print(data.little.roll)
         print(data.little.yaw)
 
-#var to check if the old signs is same or different
+# Var to check if the old signs is same or different
 prev = 0
 def detection_sign(data):
     global prev
-    #hand possiton for a signe
+    # Hand position for a sign
     if data.index.pitch <= 0.5 \
        and data.middle.pitch <= 0.5 \
        and data.third.pitch >= 2 \
        and data.little.pitch >=2\
-       and prev != 1: #if different from the previous signe
+       and prev != 1:
         prev = 1
-        return ('Ninja') # return the sign detected
+        return ('Ninja') # Return the sign detected
 
     elif data.index.pitch  >= 2 \
        and data.middle.pitch  >= 2 \
@@ -61,9 +60,9 @@ def detection_sign(data):
         return ('RIEN')
 
 
-#send vibration to fingers
+# Send vibration to fingers
 def vibration():
-        #send a vibration to a finger, for how long in second and the strengh of the fibration
+        # Send a vibration to a finger, for how long in second and the strength of the vibration
         gloves.send_vibration(gloves.hand.fingers.thumb,655, 10)
         gloves.send_vibration(gloves.hand.fingers.index,655, 10)
         gloves.send_vibration(gloves.hand.fingers.middle,655, 10)
@@ -73,15 +72,15 @@ def vibration():
 
 sign = 'Nothing'
 while 1:
-        #reciev the data from the gloves
+        # Recieve data from glove
         gloves.fetch_data()
 
         try:
-                #initialise data as a shortcut for the object gloves.hand
+                # Initialise data as a shortcut for the object gloves.hand
                 data = gloves.hand
-                #send the object to the fonction to detect sign
+                # Send the object to the function to detect sign
                 sign = detection_sign(data)
-                #print the sign detected
+                # Print the sign detected
                 print(sign)
         except (KeyError, TypeError):
                 pass

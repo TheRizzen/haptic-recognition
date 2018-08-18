@@ -8,12 +8,12 @@ import time
 gloves = SensoGlove('192.168.56.101', 53450)
 gloves.connect()
 
+# Function display adapted for the web
+
 sign = 'Nothing'
 
-
-
 def detection_test(data):
-        #print ('thumb:')
+        # print ('thumb:')
         # print(data.thumb.pitch)
         # print(data.thumb.roll)
         # print(data.thumb.yaw)
@@ -68,11 +68,6 @@ def detection_sign(data):
     else:
         return ('RIEN')
 
-
-
-count = 0
-
-
 def displayData():
         #print('\33[102m' + "__________" + '\033[0m')
 
@@ -82,7 +77,6 @@ def displayData():
             data = gloves.hand.fingers
             #sign =  detection_test(data)
             sign =  detection_sign(data)
-            #count += 1
             print(sign)
 
         except (KeyError, TypeError):

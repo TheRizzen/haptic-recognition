@@ -20,23 +20,27 @@ def read_json_payload(s):
     except json.decoder.JSONDecodeError:
         pass
 
+# Send vibration to a finger
 def send_vibration(dst, finger_str):
     payload = '{"dst": "%s","type": "vibration","data": {"type": "%s","dur": 655, "str": 10}}\n' % (dst, finger_str)
     payload = payload.encode('utf-8')
     s.send(payload);
 
+# Send vibration to all fingers
 def send_vibration_all(dst):
     send_vibration(dst, 'index')
     send_vibration(dst, 'middle')
     send_vibration(dst, 'third')
     send_vibration(dst, 'little')
 
+# Print fingers data
 def print_fingers(fingers):
     print(fingers[1])
     print(fingers[2])
     print(fingers[3])
     print(fingers[4])
 
+# Compare the fingers position with the position of a sign
 def cisors_check(fingers):
     if fingers[3]['ang'][0] >= 2 \
        and fingers[4]['ang'][0] >= 2 \
@@ -48,6 +52,7 @@ def cisors_check(fingers):
     else:
         return False
 
+# Compare the fingers position with the position of a sign
 def rock_check(fingers):
     if fingers[1]['ang'][0] >= 2 \
        and fingers[2]['ang'][0] >= 2 \
@@ -57,6 +62,7 @@ def rock_check(fingers):
     else:
         return False
 
+# Compare the fingers position with the position of a sign
 def ninja_check(fingers):
     if fingers[1]['ang'][0] <= 0.5 \
        and fingers[2]['ang'][0] <= 0.5 \
@@ -66,6 +72,7 @@ def ninja_check(fingers):
     else:
         return False
 
+# Compare the fingers position with the position of a sign
 def paper_check(fingers):
     if fingers[1]['ang'][0] <= 0 \
        and fingers[2]['ang'][0] <= 0.1 \
@@ -75,6 +82,7 @@ def paper_check(fingers):
     else:
         return False
 
+# Detect what the sign is
 def detect_sign(fingers):
     if cisors_check(fingers):
         return 'CISORS'

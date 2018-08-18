@@ -4,7 +4,7 @@ import argparse
 from sensoglove import SensoGlove
 from signs.signs_bank import SignsBank
 
-#light version of the sign_matcking.py function whitout the socket and communication with the web interface and serveur
+# Light version of the sign_matcking.py function without the socket and communication with the web interface and server
 
 parser = argparse.ArgumentParser()
 parser.add_argument('glove_host')
