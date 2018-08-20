@@ -13,6 +13,6 @@ bank = SignsBank()
 
 # Print all the meaning in the bank file
 bank.load_from_file(args.bank_file)
-print(bank.signs)
+#print(bank.signs)
 for sign in bank.signs:
     print(sign.meaning)
