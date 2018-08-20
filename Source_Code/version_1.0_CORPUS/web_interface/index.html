@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Thesis - University of Kent</title>
 
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <link rel="stylesheet" <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   </head>
 
@@ -62,6 +63,7 @@
     border: 1px solid #ECECEE;
   }
   </style>
+
   <!-- CONTENT -->
   <body>
     <div class="row justify-content-center text-center ">
@@ -76,7 +78,7 @@
       </div>
     </div>
     <div class="vertical-center">
-      <div class="container" id="result"></div>
+      <div class="container textBox" id="result">hello world, I am writing 50 characters. Past this number the text break line and the height of the line doubles. The steps are 40/80/120. Is it any good ? Is it any good ? Is it any good ? Is it any good ?</div>
     </div>
 
     <!-- SCRIPTS JS -->
@@ -91,5 +93,25 @@
         result.innerHTML += `${meaning} `;
       });
     </script>
+
+    <script type="text/javascript">
+      if ($('#result').text().length > 50) {
+        var style = $('<style>.textBox { height: 84px; }</style>');
+        $('html > head').append(style);
+      }
+      if ($('#result').text().length > 100) {
+        var style = $('<style>.textBox { height: 135px; }</style>');
+        $('html > head').append(style);
+      }
+      if ($('#result').text().length > 150) {
+        var style = $('<style>.textBox { height: 200px; }</style>');
+        $('html > head').append(style);
+      }
+      if ($('#result').text().length > 200) {
+        var style = $('<style>.textBox { height: 230px; }</style>');
+        $('html > head').append(style);
+      }
+    </script>
+
   </body>
 </html>
