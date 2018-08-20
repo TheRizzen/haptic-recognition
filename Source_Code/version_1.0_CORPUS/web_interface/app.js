@@ -9,7 +9,7 @@ const port = process.env.API_PORT || 8080;
 const signsPort = process.argv[2] || 3000
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'displaySign.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 net.createServer((socket) => {
