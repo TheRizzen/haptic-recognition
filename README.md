@@ -104,4 +104,6 @@ $ python3 sign_recording.py 192.168.56.101 53450 signDataBank.dat
 
 # License
 
-University of Kent
+MIT
+
+Copyright (c) 2018 Anthony ABRAMO, Hugo DARSES, Thibault Miranda de Oliveira
