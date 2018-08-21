@@ -9,11 +9,12 @@ from signs.signs_bank import SignsBank
 parser = argparse.ArgumentParser()
 parser.add_argument('glove_host')
 parser.add_argument('glove_port', type=int)
+parser.add_argument('file')
 args = parser.parse_args()
 
 glove = SensoGlove(args.glove_host, args.glove_port)
 sb = SignsBank()
-sb.load_from_file('hugo.dat')
+sb.load_from_file(args.file)
 
 glove.connect()
 
