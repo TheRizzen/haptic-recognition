@@ -45,10 +45,8 @@ async def python_web_interface(websocket, path):
         #     espace
         #     bool = 1
         if input_message == "RIEN":
-            print("AAA")
             pass
         else:
-            print("BBB")
             msg = msg + " " + input_message
 
             # I create an html file
