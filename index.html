@@ -8,6 +8,7 @@
 <style media="screen">
   body {
     font-size: 14px;
+    background-color: #fafafa;
   }
   .title {
     font-size: 34px;
@@ -21,12 +22,19 @@
     background-color: #29a3a3;
     line-height: 7px;
   }
+  tbody, thead {
+    background-color: #FFF;
+  }
   td, th {
     line-height: 15px;
   }
   td a {
     text-align: left;
     float: left;
+  }
+  .subCategory {
+    text-align: left!important;
+    color: #29a3a3;
   }
 </style>
 
@@ -177,20 +185,48 @@
               <td><a href="http://localhost:8080" target="_blank">Website: Corpus project</a></td>
               <td>All</td>
             </tr>
+
+            <!-- WRAPPER -->
+            <tr>
+              <th scope="row"></th>
+              <td class="subCategory"><strong>Wrapper</strong></td>
+              <td></td>
+            </tr>
             <tr>
               <th scope="row">S2</th>
               <td><a href="Source_Code/version_1.0_CORPUS/sensoglove/" target="_blank">Wrapper: simplify how the data is fetch from the gloves </a></td>
-              <td>All</td>
+              <td>tmd21</td>
+            </tr>
+
+            <!-- WEB INTERFACE -->
+            <tr>
+              <th scope="row"></th>
+              <td class="subCategory"><strong>Web Interface</strong></td>
+              <td></td>
             </tr>
             <tr>
               <th scope="row">S3</th>
-              <td><a href="Source_Code/version_1.0_CORPUS/web_interface/displaySign.html" target="_blank">PROBLEME!!! Web_interface: listen for an event and display </a></td>
+              <td><a href="Source_Code/version_1.0_CORPUS/web_interface/index.html" target="_blank">Web_interface: listen for an event and display </a></td>
               <td>All</td>
+            </tr>
+
+            <!-- SERVER -->
+            <tr>
+              <th scope="row"></th>
+              <td class="subCategory"><strong>Server</strong></td>
+              <td></td>
             </tr>
             <tr>
               <th scope="row">S4</th>
               <td><a href="file:Source_Code/version_1.0_CORPUS/web_interface/" target="_blank">Server: receive the data and create an event</a></td>
               <td>All</td>
+            </tr>
+
+            <!-- SCRIPT -->
+            <tr>
+              <th scope="row"></th>
+              <td class="subCategory"><strong>Script</strong></td>
+              <td></td>
             </tr>
             <tr>
               <th scope="row">S5</th>
