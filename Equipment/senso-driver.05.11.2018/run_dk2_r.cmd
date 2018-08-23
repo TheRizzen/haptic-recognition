@@ -1,0 +1,2 @@
+start SENSO_BLE_SERVER.exe /saddr=0.0.0.0 /sport=53452 /channels=ffff0000e0
+start SENSO_UI.exe /saddr=127.0.0.1 /sport=53452 /caddr=127.0.0.1 /cport=53450 /udpaddr=127.0.0.1 /udpport=53451 /right /reconnect /name=DK2_R
